@@ -21,7 +21,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: echo $DOCKER_USERNAME
+      run: echo ${{ vars.DOCKER_USERNAME }}
       
     - name: Upload SBOM(Cyclonedx)
       uses: actions/upload-artifact@v3
