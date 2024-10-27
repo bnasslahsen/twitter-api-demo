@@ -46,6 +46,9 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>${jib-maven-plugin.version}</version>
 				<configuration>
+					<from>
+						<image>eclipse-temurin:21-jre</image>
+					</from>
 					<to>
 						<image>
 							registry.hub.docker.com/bnasslahsen/devops-repo
