@@ -38,7 +38,7 @@ jobs:
     - name: Push Docker Image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}
 
-    # (Optional) Tag the image with `latest` and push again
+    # (Optional) Tag the image with `latest` and push again 
     - name: Tag Docker Image as latest
       run: |
         docker tag ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:latest
