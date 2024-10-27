@@ -21,7 +21,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B -Ddocker.username=${{ secrets.DOCKER_USERNAME }} clean compile jib:build --file pom.xml
+      run: mvn -B -Djib.to.auth.username=$DOCKER_USERNAME -Djib.to.auth.password=$DOCKER_PASSWORD clean compile jib:build --file pom.xml
+  
     - name: Upload SBOM(Cyclonedx)
       uses: actions/upload-artifact@v3
       with:
