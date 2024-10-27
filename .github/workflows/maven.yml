@@ -8,6 +8,10 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -57,44 +61,5 @@ jobs:
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: 'trivy-results.sarif'      
-  scan:
-    name: Scan dependencies with Trivy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    # Step 1: Run Trivy in GitHub for Dependency Graph
-    - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
-      uses: aquasecurity/trivy-action@0.28.0
-      with:
-        scan-type: 'fs'
-        format: 'github'
-        output: 'dependency-results.sbom.json'
-        image-ref: '.'
-        github-pat: ${{ secrets.GITHUB_TOKEN }}
-
-    # Step 5: Run Trivy SBOM Scan on the source files
-    - name: Trivy SBOM Scan (SPDX Format)
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'fs'
-        format: 'spdx-json'
-        output: 'reports/sbom-spdx.json'
-
-    # Step 6: Run Trivy Docker Image Vulnerability Scan
-    - name: Trivy Docker Image Scan
-      uses: aquasecurity/trivy-action@master
-      with:
-        scan-type: 'image'
-        image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:latest"
-        format: 'table'
-        severity: 'CRITICAL,HIGH'
-        ignore-unfixed: true
-        output: 'reports/docker-scan-report.txt'
-
-    # Step 7: Upload reports as artifacts
-    - name: Upload SBOM and Docker Scan Report
-      uses: actions/upload-artifact@v3
-      with:
-        name: scan-reports
-        path: reports/  
+ 
 
