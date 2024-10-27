@@ -21,7 +21,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: echo "Value of MY_VARIABLE is ${{ env.DOCKER_PASSWORD }}"
+      run: echo "Value of MY_VARIABLE is ${{ secrets.DOCKER_PASSWORD }}"
       
     - name: Upload SBOM(Cyclonedx)
       uses: actions/upload-artifact@v3
