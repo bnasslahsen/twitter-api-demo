@@ -47,7 +47,7 @@
 				<configuration>
 					<to>
 						<image>
-							registry.hub.docker.com/bnasslahsen/devops-repo
+							docker.io/bnasslahsen/devops-repo
 						</image>
 					</to>
 				</configuration>
