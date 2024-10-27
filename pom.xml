@@ -46,9 +46,7 @@
 				<version>${jib-maven-plugin.version}</version>
 				<configuration>
 					<to>
-						<image>
-							docker.io/bnasslahsen/devops-repo
-						</image>
+						<image>bnasslahsen/twitter-api-demo</image>
 					</to>
 				</configuration>
 			</plugin>

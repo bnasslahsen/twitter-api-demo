@@ -57,7 +57,7 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'image'
-        image-ref: "${{ secrets.DOCKER_USERNAME }}/devops-repo/twitter-api-demo:latest"
+        image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:latest"
         format: 'table'
         severity: 'CRITICAL,HIGH'
         ignore-unfixed: true
