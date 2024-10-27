@@ -14,8 +14,8 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ vars.DOCKER_PASSWORD }}
       with:
         java-version: '17'
         distribution: 'temurin'
