@@ -72,6 +72,7 @@ jobs:
           severity: 'HIGH,CRITICAL'
           exit-code: 1
           skip-setup-trivy: true
+          limit-severities-for-sarif: true
 
       - name: Push Docker Image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}
