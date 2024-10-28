@@ -27,18 +27,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
       
-      # Log in to Docker Hub
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      
       # Build the Docker image
       - name: Build Docker Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }} .
       
-
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
@@ -53,7 +45,13 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'      
       
-      
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       # Push the Docker image to Docker Hub
       - name: Push Docker Image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}
