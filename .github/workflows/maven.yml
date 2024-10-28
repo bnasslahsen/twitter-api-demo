@@ -60,7 +60,7 @@ jobs:
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: "fs"
-        image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:latest"
+        image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}"
         format: table
         scan-ref: .
         severity: HIGH,CRITICAL
