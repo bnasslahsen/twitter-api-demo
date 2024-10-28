@@ -54,6 +54,17 @@ jobs:
           name: trivy-report
           path: trivy-report.json
           retention-days: 30
+
+      - name: Fail build on High/Criticial Vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          format: table
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: 1
+          skip-setup-trivy: true
           
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -62,6 +73,7 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
           exit-code: '0'
 
       - name: Upload Trivy scan results to GitHub Security tab
