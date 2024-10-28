@@ -1,5 +1,4 @@
 name: Twitter API CI/CD Demo
-
 on:
   push:
     branches: [ "main" ]
