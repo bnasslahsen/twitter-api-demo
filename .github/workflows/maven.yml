@@ -78,7 +78,16 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'      
-      
+
+      - name: Fail build on High/Criticial Vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}"
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: 1
+          skip-setup-trivy: true
+          
       # Push the Docker image to Docker Hub
       - name: Push Docker Image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}
