@@ -62,6 +62,7 @@ jobs:
           format: table
           scan-ref: .
           severity: HIGH,CRITICAL
+          limit-severities-for-sarif: true
           exit-code: 1
           skip-setup-trivy: true
           
@@ -83,7 +84,7 @@ jobs:
         with:
           image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}"
           format: sarif
-          limit-severities-for-sarif: false
+          limit-severities-for-sarif: true
           severity: 'HIGH,CRITICAL'
           exit-code: 1
           skip-setup-trivy: true
