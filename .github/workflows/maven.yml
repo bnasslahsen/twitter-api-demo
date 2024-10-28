@@ -71,7 +71,7 @@ jobs:
           image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}"
           format: 'sarif'
           output: 'trivy-results.sarif'
-          severity: 'HIGH,CRITICAL'
+          severity: 'MEDIUM,HIGH,CRITICAL'
           limit-severities-for-sarif: true
 
       - name: Upload Trivy scan results to GitHub Security tab
