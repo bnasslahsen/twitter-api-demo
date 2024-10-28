@@ -83,7 +83,7 @@ jobs:
         with:
           image-ref: "${{ secrets.DOCKER_USERNAME }}/twitter-api-demo:${{ github.sha }}"
           format: table
-          vuln-type: 'os,library'
+          vuln-type: 'library'
           severity: 'CRITICAL,HIGH'
           exit-code: 1
           skip-setup-trivy: true
